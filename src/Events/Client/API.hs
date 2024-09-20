@@ -1,6 +1,6 @@
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE TypeOperators #-}
-module Client.API
+module Events.Client.API
   ( listSessionsClient
   , getSessionClient
   , listTopicsClient
@@ -16,9 +16,9 @@ import Servant
 import Servant.Client
 import qualified Data.Aeson.KeyMap as KM
 
-import API
-import API.Helpers
-import Event
+import Events.API
+import Events.API.Helpers
+import Events.Event
 
 
 type GetSessionClientM = UUID -> ClientM SessionResponse

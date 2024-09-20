@@ -25,8 +25,8 @@ source-repository head
 
 library
   exposed-modules:
-      Client
-      Client.API
+      Events.Client
+      Events.Client.API
   other-modules:
       Paths_mtaylor_io_events_client
   autogen-modules:
