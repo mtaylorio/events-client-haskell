@@ -7,7 +7,6 @@ module Events.Client
   ) where
 
 import Control.Concurrent.STM (readTVarIO)
-import Data.Text (pack)
 import Data.UUID.V4 (nextRandom)
 import Network.HTTP.Client
 import Network.HTTP.Client.TLS
@@ -16,6 +15,7 @@ import System.Environment (lookupEnv)
 
 import IAM.Client
 import IAM.Client.Auth
+import IAM.UserIdentifier
 
 
 data EventsClient = EventsClient
@@ -59,7 +59,7 @@ requestAuth iam req =
       requestId <- nextRandom
       maybeSessionToken <- readTVarIO (iamClientSessionTokenVar iam)
       let iamConfig = iamClientConfig iam
-      let user = pack $ iamClientConfigUserIdentifier iamConfig
+      let user = userIdentifierToText $ iamClientConfigUserIdentifier iamConfig
       let publicKey = encodePublicKey $ iamClientConfigSecretKey iamConfig
       let stringToSign = authStringToSign req requestId maybeSessionToken
       let authorization = authHeader stringToSign $ iamClientConfigSecretKey iamConfig

@@ -25,6 +25,7 @@ dependencies:
 - http-client
 - http-client-tls
 - mtaylor-io-iam-client
+- mtaylor-io-iam-core
 - mtaylor-io-events-core
 - servant-client
 - servant-server

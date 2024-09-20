@@ -41,6 +41,7 @@ library
     , http-client-tls
     , mtaylor-io-events-core
     , mtaylor-io-iam-client
+    , mtaylor-io-iam-core
     , servant-client
     , servant-server
     , stm
@@ -65,6 +66,7 @@ executable events-client-exe
     , mtaylor-io-events-client
     , mtaylor-io-events-core
     , mtaylor-io-iam-client
+    , mtaylor-io-iam-core
     , servant-client
     , servant-server
     , stm
@@ -90,6 +92,7 @@ test-suite events-client-test
     , mtaylor-io-events-client
     , mtaylor-io-events-core
     , mtaylor-io-iam-client
+    , mtaylor-io-iam-core
     , servant-client
     , servant-server
     , stm
