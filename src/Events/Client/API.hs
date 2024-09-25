@@ -45,6 +45,9 @@ type DeleteTopicClientM = ClientM NoContent
 type ListTopicEventsClientM = Maybe Int -> Maybe Int -> ClientM (ListResponse EventData)
 
 
+type PublishEventClientM = PublishEvent -> ClientM EventData
+
+
 type GetTopicEventClientM = ClientM EventData
 
 
@@ -62,7 +65,7 @@ type TopicEventClientM
 
 type TopicEventsClientM
   = ListTopicEventsClientM
-  :<|> (EventData -> ClientM EventData)
+  :<|> PublishEventClientM
   :<|> (UUID -> TopicEventClientM)
 
 
@@ -81,7 +84,7 @@ data TopicClient = TopicClient
   , deleteTopicClient :: DeleteTopicClientM
   , updateTopicClient :: UpdateTopic -> ClientM TopicResponse
   , listTopicEventsClient :: ListTopicEventsClientM
-  , createTopicEventClient :: EventData -> ClientM EventData
+  , createTopicEventClient :: PublishEvent -> ClientM EventData
   , topicEventClient :: UUID -> TopicEventClient
   }
 
