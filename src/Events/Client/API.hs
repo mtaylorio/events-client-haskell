@@ -45,7 +45,7 @@ type DeleteTopicClientM = ClientM NoContent
 type ListTopicEventsClientM = Maybe Int -> Maybe Int -> ClientM (ListResponse EventData)
 
 
-type PublishEventClientM = PublishEvent -> ClientM EventData
+type PublishEventClientM = KM.KeyMap Value -> ClientM EventData
 
 
 type GetTopicEventClientM = ClientM EventData
@@ -84,7 +84,7 @@ data TopicClient = TopicClient
   , deleteTopicClient :: DeleteTopicClientM
   , updateTopicClient :: UpdateTopic -> ClientM TopicResponse
   , listTopicEventsClient :: ListTopicEventsClientM
-  , createTopicEventClient :: PublishEvent -> ClientM EventData
+  , createTopicEventClient :: KM.KeyMap Value -> ClientM EventData
   , topicEventClient :: UUID -> TopicEventClient
   }
 

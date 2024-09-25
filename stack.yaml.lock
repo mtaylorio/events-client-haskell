@@ -5,15 +5,15 @@
 
 packages:
 - completed:
-    commit: c59be793e18431cd03331bdd6d24331a97284ad7
+    commit: 5f52c7e3fb0bd766059ee762ce716530f2faeda9
     git: https://github.com/mtaylorio/events-core.git
     name: mtaylor-io-events-core
     pantry-tree:
-      sha256: 0566becfe56bf367954bb6de2291386bae8153a8fc54b33f405c2358aedf7076
+      sha256: 40fe8cb69bbc73fadff3b2d54853f0c346cdf1939f6bb884e192a23e16f5e86d
       size: 899
     version: 0.1.0.0
   original:
-    commit: c59be793e18431cd03331bdd6d24331a97284ad7
+    commit: 5f52c7e3fb0bd766059ee762ce716530f2faeda9
     git: https://github.com/mtaylorio/events-core.git
 - completed:
     commit: 3682e99d85ec9c4de6cf233ad9ded61f3f053e9e
