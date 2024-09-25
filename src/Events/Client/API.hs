@@ -54,11 +54,16 @@ type DeleteTopicEventClientM = ClientM NoContent
 type UpdateTopicEventClientM = KM.KeyMap Value -> ClientM EventData
 
 
-type TopicEventClientM =
-  GetTopicEventClientM :<|> DeleteTopicEventClientM :<|> UpdateTopicEventClientM
+type TopicEventClientM
+  = GetTopicEventClientM
+  :<|> DeleteTopicEventClientM
+  :<|> UpdateTopicEventClientM
 
 
-type TopicEventsClientM = ListTopicEventsClientM :<|> (UUID -> TopicEventClientM)
+type TopicEventsClientM
+  = ListTopicEventsClientM
+  :<|> (EventData -> ClientM EventData)
+  :<|> (UUID -> TopicEventClientM)
 
 
 type TopicClientM
@@ -76,6 +81,7 @@ data TopicClient = TopicClient
   , deleteTopicClient :: DeleteTopicClientM
   , updateTopicClient :: UpdateTopic -> ClientM TopicResponse
   , listTopicEventsClient :: ListTopicEventsClientM
+  , createTopicEventClient :: EventData -> ClientM EventData
   , topicEventClient :: UUID -> TopicEventClient
   }
 
@@ -111,7 +117,9 @@ topicClient topicId =
     getTopicClient' :<|>
       deleteTopicClient' :<|>
       updateTopicClient' :<|>
-      (listTopicEventsClient' :<|> mkTopicEventClient') = mkTopicClient topicId
+      ( listTopicEventsClient'
+      :<|> createTopicEventClient'
+      :<|> mkTopicEventClient') = mkTopicClient topicId
     mkTopicEventClient :: UUID -> TopicEventClient
     mkTopicEventClient eventId =
       let
@@ -130,5 +138,6 @@ topicClient topicId =
       , deleteTopicClient = deleteTopicClient'
       , updateTopicClient = updateTopicClient'
       , listTopicEventsClient = listTopicEventsClient'
+      , createTopicEventClient = createTopicEventClient'
       , topicEventClient = mkTopicEventClient
       }
